@@ -76,6 +76,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project_dependencies.android_appcompat_v7
-    testCompile project_test_dependencies.junit
+    compile android_appcompat_v7
+    testCompile junit
 }
