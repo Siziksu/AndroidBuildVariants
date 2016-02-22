@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
-    flavorDimensions "type", "flavor", "country"
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+    flavorDimensions dimension_type, dimension_flavor, dimension_country
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -11,10 +11,11 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
-        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
-        versionCode Integer.parseInt(project.APPLICATION_VERSION_CODE)
-        versionName project.APPLICATION_VERSION_NAME
+        applicationId application_id
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
     }
     buildTypes {
         release {
@@ -27,59 +28,47 @@ android {
         }
     }
     productFlavors {
-        es {
-            flavorDimension "country"
-        }
-        uk {
-            flavorDimension "country"
-        }
-        demo {
-            flavorDimension "flavor"
-        }
-        full {
-            flavorDimension "flavor"
-        }
-        mock {
-            flavorDimension "type"
-        }
-        production {
-            flavorDimension "type"
-        }
+        es { dimension dimension_country }
+        uk { dimension dimension_country }
+        demo { dimension dimension_flavor }
+        full { dimension dimension_flavor }
+        mock { dimension dimension_type }
+        production { dimension dimension_type }
     }
     android.applicationVariants.all { variant ->
         def mergedFlavor = variant.mergedFlavor
         switch (variant.flavorName) {
-            case project.MOCK_DEMO_ES:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.MOCK + project.DEMO + project.ES)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.MOCK + project.DEMO + project.ES)
+            case mock_demo_es:
+                mergedFlavor.setApplicationId(application_id + type_mock + flavor_demo + country_es)
+                mergedFlavor.setVersionName(version_name + type_mock + flavor_demo + country_es)
                 break
-            case project.MOCK_DEMO_UK:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.MOCK + project.DEMO + project.UK)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.MOCK + project.DEMO + project.UK)
+            case mock_demo_uk:
+                mergedFlavor.setApplicationId(application_id + type_mock + flavor_demo + country_uk)
+                mergedFlavor.setVersionName(version_name + type_mock + flavor_demo + country_uk)
                 break
-            case project.MOCK_FULL_ES:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.MOCK + project.FULL + project.ES)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.MOCK + project.FULL + project.ES)
+            case mock_full_es:
+                mergedFlavor.setApplicationId(application_id + type_mock + flavor_full + country_es)
+                mergedFlavor.setVersionName(version_name + type_mock + flavor_full + country_es)
                 break
-            case project.MOCK_FULL_UK:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.MOCK + project.FULL + project.UK)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.MOCK + project.FULL + project.UK)
+            case mock_full_uk:
+                mergedFlavor.setApplicationId(application_id + type_mock + flavor_full + country_uk)
+                mergedFlavor.setVersionName(version_name + type_mock + flavor_full + country_uk)
                 break
-            case project.PRODUCTION_DEMO_ES:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.PRODUCTION + project.DEMO + project.ES)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.PRODUCTION + project.DEMO + project.ES)
+            case production_demo_es:
+                mergedFlavor.setApplicationId(application_id + type_production + flavor_demo + country_es)
+                mergedFlavor.setVersionName(version_name + type_production + flavor_demo + country_es)
                 break
-            case project.PRODUCTION_DEMO_UK:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.PRODUCTION + project.DEMO + project.UK)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.PRODUCTION + project.DEMO + project.UK)
+            case production_demo_uk:
+                mergedFlavor.setApplicationId(application_id + type_production + flavor_demo + country_uk)
+                mergedFlavor.setVersionName(version_name + type_production + flavor_demo + country_uk)
                 break
-            case project.PRODUCTION_FULL_ES:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.PRODUCTION + project.FULL + project.ES)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.PRODUCTION + project.FULL + project.ES)
+            case production_full_es:
+                mergedFlavor.setApplicationId(application_id + type_production + flavor_full + country_es)
+                mergedFlavor.setVersionName(version_name + type_production + flavor_full + country_es)
                 break
-            case project.PRODUCTION_FULL_UK:
-                mergedFlavor.setApplicationId(project.APPLICATION_BASE_ID + project.PRODUCTION + project.FULL + project.UK)
-                mergedFlavor.setVersionName(project.APPLICATION_VERSION_NAME + project.PRODUCTION + project.FULL + project.UK)
+            case production_full_uk:
+                mergedFlavor.setApplicationId(application_id + type_production + flavor_full + country_uk)
+                mergedFlavor.setVersionName(version_name + type_production + flavor_full + country_uk)
                 break
         }
     }
@@ -87,7 +76,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile "com.google.guava:guava:18.0"
+    compile project_dependencies.android_appcompat_v7
+    testCompile project_test_dependencies.junit
 }

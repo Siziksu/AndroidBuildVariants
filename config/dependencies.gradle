@@ -1,0 +1,29 @@
+ext {
+    // Android
+    android_support_version             = '23.1.1'
+    android_support_v4_version          = android_support_version
+    android_support_annotations_version = android_support_version
+    android_appcompat_v7_version        = android_support_version
+    android_design_version              = android_support_version
+    android_recyclerview_v7_version     = android_support_version
+    android_cardview_v7_version         = android_support_version
+    android_multidex_version            = '1.0.1'
+
+    // Test Libraries
+    junitVersion = "4.12"
+
+    project_dependencies = [
+            android_support_v4         : "com.android.support:support-v4:${android_support_v4_version}",
+            android_support_annotations: "com.android.support:support-annotations:${android_support_annotations_version}",
+            android_design             : "com.android.support:design:${android_design_version}",
+            android_appcompat_v7       : "com.android.support:appcompat-v7:${android_appcompat_v7_version}",
+            android_recyclerview_v7    : "com.android.support:recyclerview-v7:${android_recyclerview_v7_version}",
+            android_cardview_v7        : "com.android.support:cardview-v7:${android_cardview_v7_version}",
+            android_multidex           : "com.android.support:multidex:${android_multidex_version}",
+    ]
+
+    project_test_dependencies = [
+            android_support_annotations: "com.android.support:support-annotations:${android_support_annotations_version}",
+            junit                      : "junit:junit:${junitVersion}",
+    ]
+}

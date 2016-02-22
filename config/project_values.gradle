@@ -1,0 +1,29 @@
+ext {
+    application_id      = "com.siziksu.build_variants"
+    compile_sdk_version = 23
+    build_tools_version = "23.0.2"
+    min_sdk_version     = 19
+    target_sdk_version  = 23
+    version_code        = 2319001
+    version_name        = "0.0.1"
+
+    dimension_type    = "type"
+    dimension_flavor  = "flavor"
+    dimension_country = "country"
+
+    type_mock       = ".mock"
+    type_production = ".production"
+    flavor_demo     = ".demo"
+    flavor_full     = ".full"
+    country_es      = ".es"
+    country_uk      = ".uk"
+
+    mock_demo_es       = "mockDemoEs"
+    mock_demo_uk       = "mockDemoUk"
+    mock_full_es       = "mockFullEs"
+    mock_full_uk       = "mockFullUk"
+    production_demo_es = "productionDemoEs"
+    production_demo_uk = "productionDemoUk"
+    production_full_es = "productionFullEs"
+    production_full_uk = "productionFullUk"
+}
